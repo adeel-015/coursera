@@ -1,12 +1,25 @@
-Question 1
-Social network connectivity. Given a social network containing n members and a log file containing m timestamps at which times pairs of members formed friendships, design an algorithm to determine the earliest time at which all members are connected (i.e., every member is a friend of a friend of a friend ... of a friend). Assume that the log file is sorted by timestamp and that friendship is an equivalence relation. The running time of your algorithm should be m log, n or better and use extra space proportional to n
+# Union-Find Based Algorithm Problems
 
-Note: these interview questions are ungraded and purely for your own enrichment. To get a hint, submit a solution.
+This README documents the solutions for three classic algorithm problems involving the Union-Find (Disjoint Set Union) data structure. These problems are typically asked in algorithmic interviews and appear in courses like Coursera's **Algorithms Part I**.
 
-----------------------------------------------
+---
 
-ANSWER:-
+## 📌 Question 1: Social Network Connectivity
 
+**Problem:**  
+Given a social network of `n` members and a sorted log file with `m` timestamps when pairs of members formed friendships, determine the earliest time when all members are connected.
+
+**Constraints:**
+- Friendship is an equivalence relation  
+- Logs are sorted by timestamp  
+- Time complexity: `O(m log n)` or better  
+- Space complexity: `O(n)`
+
+**Approach:**  
+Use Union-Find to track connected components. Initially, there are `n` components. For each timestamped friendship, perform a union. If the union reduces the total number of components to 1, return that timestamp.
+
+**Pseudocode:**
+```plaintext
 Initialize UnionFind with n members
 components = n
 
@@ -17,19 +30,24 @@ for each (timestamp, a, b) in logs:
             return timestamp
 
 return -1  // if all members never connect
+```
 
-------------------------------------------------------------------------------------------------------------------------------------
+---
 
+## 📌 Question 2: Union-Find with Specific Canonical Element
 
-Question 2
-Union-find with specific canonical element. Add a method find() to the union-find data type so that find(i) returns the largest element in the connected component containing i. The operations, union() connected() and find() should all take logarithmic time or better.
+**Problem:**  
+Extend the Union-Find data type so that `find(i)` returns the **largest element** in the connected component containing `i`.
 
-For example, if one of the connected components is {1,2,6,9}, then the find() method should return 9 for each of the four elements in the connected components.
+**Constraints:**
+- All operations (`union`, `connected`, `find`) must be `O(log n)` or better  
+- Space complexity: `O(n)`
 
-----------------------------------------------------------
+**Approach:**  
+In addition to the parent array, maintain a `max[i]` array to store the maximum element in each component. Update `max` during each union operation.
 
-ANSWER :-
-
+**Pseudocode:**
+```plaintext
 Initialize:
     parent[i] = i
     max[i] = i  // Track max element in each component
@@ -49,25 +67,28 @@ function union(a, b):
     // Union by rank or size
     parent[rootB] = rootA
     max[rootA] = max(max[rootA], max[rootB])
+```
 
+---
 
-------------------------------------------------------------------------------------------------------------------------------------
+## 📌 Question 3: Successor with Delete
 
+**Problem:**  
+Given a set `S = {0, 1, ..., n - 1}` and two types of operations:
+- Remove `x` from `S`  
+- Find the successor of `x`: the smallest `y` in `S` such that `y ≥ x`
 
-Question 3
-Successor with delete. Given a set of n integers S={0,1,...,n−1} and a sequence of requests of the following form:
+Design a data type where all operations (except construction) take `O(log n)` time or better.
 
-- Remove x from S
-- Find the successor of x: the smallest y in S such that y ≥ x.
+**Constraints:**
+- Time complexity: `O(log n)` per operation  
+- Space complexity: `O(n)`
 
-design a data type so that all operations (except construction)  take logarithmic time or better in the worst case.
+**Approach:**  
+Use Union-Find to link each removed element `x` to `x + 1`. The `find(x)` will then return the next available element that is still in the set.
 
-I have the above questions in line as well. Find a suitable answers for all three questions.
-
-----------------------------------------------------------
-
-ANSWER:-
-
+**Pseudocode:**
+```plaintext
 Initialize:
     parent[i] = i for all 0 ≤ i < n
     // Each element points to itself initially
@@ -86,4 +107,10 @@ function successor(x):
     
 function union(a, b):
     parent[find(a)] = find(b)
+```
 
+---
+
+## 📘 License
+
+These problems are for educational and enrichment purposes. Inspired by algorithmic challenges from Coursera and classic textbook problems.
