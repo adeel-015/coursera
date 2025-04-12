@@ -7,6 +7,7 @@
 Design an algorithm for the 3-SUM problem that takes time proportional to n² in the worst case. You may assume that you can sort the n integers in time proportional to n² or better.
 
 **Pseudocode:**  
+```
 Sort the array a[]           // O(n²) or better assumed  
 for i from 0 to n-2:  
   j = i + 1  
@@ -23,6 +24,7 @@ return false
 
 **Time Complexity:**  
 O(n²)
+```
 
 ---
 
@@ -34,6 +36,7 @@ An array is *bitonic* if it is comprised of an increasing sequence followed by a
 ### Standard Version: ∼ 3 log n compares in the worst case
 
 **Pseudocode:**  
+```
 Find peak index p using binary search       // O(log n)  
 if binary_search(a[0..p], x) == true:  
   return true  
@@ -41,6 +44,7 @@ else if binary_search_desc(a[p+1..n-1], x) == true:
   return true  
 else:  
   return false
+```
 
 ---
 
@@ -67,10 +71,12 @@ You have an n-story building (floors 1 through n) and plenty of eggs. An egg bre
 ### Version 0: 1 egg, ≤ T tosses
 
 **Pseudocode:**  
+```
 for i from 1 to n:  
   drop egg at floor i  
   if egg breaks:  
     return i
+```
 
 **Worst-case:**  
 T tosses
@@ -94,12 +100,14 @@ Use exponential search to find upper bound, then binary search in narrowed range
 ### Version 3: 2 eggs and ∼ 2√n tosses
 
 **Pseudocode:**  
+```
 step = ceil(sqrt(n))  
 for i in range(step, n+1, step):  
   drop egg at i  
   if egg breaks:  
     break  
 // linear search from previous step to i
+```
 
 ---
 
