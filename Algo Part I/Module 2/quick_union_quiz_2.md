@@ -10,5 +10,5 @@
 ---
 
 ### ✅ Correct Answer: linear
-
+(See Slide 27)\
 In the worst-case scenario, the `find` operation in quick-union can traverse up to `n` elements if the tree is completely unbalanced.
